@@ -60,6 +60,8 @@ class Lectures extends Course {
     console.log(`Lecture: ${this.title}`);
   }
 }
+const lecture1 = new Lectures("Introduction to Programming");
+lecture1.display();
 
 //implementation of the Assessment interface
 class Quiz implements Assessment {
@@ -80,6 +82,9 @@ class Quiz implements Assessment {
     else return "F";
   }
 }
+
+const quiz1 = new Quiz("Midterm Exam", 100);
+console.log(`Quiz Title: ${quiz1.title}`);
 
 class Assignment implements Assessment {
   title: string;
@@ -123,6 +128,8 @@ class Notifications {
     );
   }
 }
+const student1 = new Student(1, "Titus");
+Notifications.sendNotification(student1, "Your assignment is due tomorrow.");
 //enrollment class
 
 class Enrollment {
@@ -131,6 +138,7 @@ class Enrollment {
   constructor(public student: Student, public course: Tcourse) {
 
   }
+  
   setGrade(score: number) {
     if (score >= 0 && score <= 100) {
       this.grade = score;
@@ -143,3 +151,7 @@ class Enrollment {
     return this.grade;
   }
 }
+const course1 = new Lectures("Data Structures");
+course1.display();
+const enrollment1 = new Enrollment(student1, course1);
+enrollment1.setGrade(85);
