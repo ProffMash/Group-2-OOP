@@ -2,10 +2,13 @@
   "name": "simple-setup-ts-node",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "quiz.js",
   "scripts": {
     "build": "tsc",
     "dev":"ts-node-dev --respawn --transpile-only ./src/test-two.ts",
+    "dev":"ts-node-dev --respawn --transpile-only ./src/quiz4.ts",
+    "dev":"ts-node-dev --respawn --transpile-only ./src/quizThree.ts",
+    "dev":"ts-node-dev --respawn --transpile-only ./src/quiz1.ts",
     "start": "npm run build && node ./dist/index.js"
   },
   "keywords": [],
