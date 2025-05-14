@@ -43,7 +43,7 @@ class Admin extends Person {
 
 //composite patterns
 abstract class CourseContent {
-    title: string;
+  title: string;
   constructor(title: string) {
     this.title = title;
   }
@@ -52,27 +52,7 @@ abstract class CourseContent {
 
 class Lecture extends CourseContent {
   display() {
-
     console.log(`Lecture: ${this.title}`);
-  }
-}
-
-class Assignment extends CourseContent {
-  display() {
-    console.log(`Assignment: ${this.title}`);
-  }
-}
-
-class Module extends CourseContent {
-  contents: CourseContent[] = [];
-
-  addContent(content: CourseContent) {
-    this.contents.push(content);
-  }
-
-  display() {
-    console.log(`Module: ${this.title}`);
-    this.contents.forEach((content) => content.display());
   }
 }
 
@@ -94,4 +74,59 @@ class Quiz implements Assessment {
     else if (percentage >= 60) return "D";
     else return "F";
   }
+}
+
+class Assignment implements Assessment {
+  title: string;
+  maxScore: number;
+
+  constructor(title: string, maxScore: number) {
+    this.title = title;
+    this.maxScore = maxScore;
+  }
+
+  calculateGrade(score: number): string {
+    const percentage = (score / this.maxScore) * 100;
+    if (percentage >= 90) return "A";
+    else if (percentage >= 80) return "B";
+    else if (percentage >= 70) return "C";
+    else if (percentage >= 60) return "D";
+    else return "F";
+  }
+}
+
+class Project implements Assessment {
+  title: string;
+  maxScore: number;
+
+  constructor(title: string, maxScore: number) {
+    this.title = title;
+    this.maxScore = maxScore;
+  }
+
+  calculateGrade(score: number): string {
+    const percentage = (score / this.maxScore) * 100;
+    if (percentage >= 90) return "A";
+    else if (percentage >= 80) return "B";
+    else if (percentage >= 70) return "C";
+    else if (percentage >= 60) return "D";
+    else return "F";
+  }
+}
+
+class Notifications {
+  static sendNotification(person: Person, message: string) {
+    console.log(
+      `Notification to ${person.getRole()} (${person.name}): ${message}`
+    );
+  }
+}
+const johnDoe = new Student(1, "John Doe");
+const notify = Notifications.sendNotification(
+  johnDoe,
+  "Your assignment is due tomorrow."
+);
+
+class Enrollment {
+    
 }
