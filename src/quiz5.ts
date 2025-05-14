@@ -9,7 +9,7 @@ abstract class Animal {
 class Bird extends Animal {
   eat() { console.log(`${this.name} pecks at seeds.`); }
   makeSound() { console.log(`${this.name} chirps.`); }
-  fly() { console.log(`${this.name} is flying.`); }
+  fly() { console.log(`${this.name} is flying High.`); }
 }
 
 class Mammal extends Animal {
