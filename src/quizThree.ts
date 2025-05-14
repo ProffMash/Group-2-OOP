@@ -12,6 +12,11 @@ interface Assessment {
   calculateGrade(score: number): string;
 }
 
+interface Tcourse {
+    title: string;
+    display(): void;
+}
+
 //abstraction class for people and content
 abstract class Person implements PersonInterface {
   id: number;
@@ -42,7 +47,7 @@ class Admin extends Person {
 }
 
 //composite patterns
-abstract class CourseContent {
+abstract class Course implements Tcourse {
   title: string;
   constructor(title: string) {
     this.title = title;
@@ -50,7 +55,7 @@ abstract class CourseContent {
   abstract display(): void;
 }
 
-class Lecture extends CourseContent {
+class Lectures extends Course {
   display() {
     console.log(`Lecture: ${this.title}`);
   }
@@ -106,11 +111,8 @@ class Project implements Assessment {
 
   calculateGrade(score: number): string {
     const percentage = (score / this.maxScore) * 100;
-    if (percentage >= 90) return "A";
-    else if (percentage >= 80) return "B";
-    else if (percentage >= 70) return "C";
-    else if (percentage >= 60) return "D";
-    else return "F";
+    if (percentage >= 50) return "Pass";
+    else return "Fail";
   }
 }
 
@@ -121,12 +123,23 @@ class Notifications {
     );
   }
 }
-const johnDoe = new Student(1, "John Doe");
-const notify = Notifications.sendNotification(
-  johnDoe,
-  "Your assignment is due tomorrow."
-);
+//enrollment class
 
 class Enrollment {
-    
+  private grade: number = 0;
+
+  constructor(public student: Student, public course: Tcourse) {
+
+  }
+  setGrade(score: number) {
+    if (score >= 0 && score <= 100) {
+      this.grade = score;
+    } else {
+      throw new Error("Invalid grade");
+    }
+  }
+
+  getGrade(): number {
+    return this.grade;
+  }
 }
